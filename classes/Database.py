@@ -21,9 +21,9 @@ class Database(object):
             self.db_f_name = config['DEFAULT']['db_f_name']
             self.conn = sqlite3.connect(os.getcwd() + os.path.sep + self.db_f_name)
         else:
-            config.read('/var/www/webApp/webApp/revalConfig.ini')
+            config.read(os.getcwd() + os.path.sep + 'revalConfig.ini')
             self.db_f_name = config['DEFAULT']['db_f_name']
-            self.conn = sqlite3.connect('/var/www/webApp/webApp/' + self.db_f_name)
+            self.conn = sqlite3.connect(os.getcwd() + os.path.sep + self.db_f_name)
 
     def create_table(self, table_name):
         c = self.conn.cursor()

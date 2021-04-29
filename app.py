@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from flask import Flask, session
-from flask_apscheduler import APScheduler
+# from flask_apscheduler import APScheduler
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
@@ -19,7 +19,7 @@ from classes.Model import User
 
 app = Flask(__name__)
 
-scheduler = APScheduler()
+# scheduler = APScheduler()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///revalEquip.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
