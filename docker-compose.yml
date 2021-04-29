@@ -13,13 +13,12 @@ services:
             - db
 
     db:
-        image: mysql:latest
+        image: postgres:latest
         restart: always
         environment:
-            MYSQL_DATABASE: test
-            MYSQL_USER: test
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test
+            POSTGRES_DB: test
+            POSTGRES_USER: test
+            POSTGRES_PASSWORD: test
         volumes:
             - .:/app
         ports:
