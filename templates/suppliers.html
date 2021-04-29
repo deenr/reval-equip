@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- https://codepen.io/BuddyLReno/pen/boGRPO -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+  
+  <title>Reval - Users</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/table_design.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/suppliers_form.css') }}">
+  
+	<!-- <link rel="stylesheet" type="text/css" href="static/styles/perfect-scrollbar.css"> -->
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/suppliers.js')}}"></script>
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Kite Menu CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu.css') }}">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+  
+
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger flash">
+            <div class="notification_text">
+                {{ messages[0] }}<text style="padding-left:10px;" onclick="removeFlashNotification()">x</text>
+            </div>
+        </div>
+    {% endif %}
+    {% endwith %}
+    
+    <!--Start Kite Menu-->
+    {% include 'menu.html' %}
+    <!--End Kite Menu-->
+    <script src="{{url_for('static', filename='js/menu.js')}}"></script>
+
+    <text id="current_user_id" style="display: none;">ID={{current_user.id}}</text>
+
+    <script>
+        $(document).ready(function () {
+            $(".kite-menu").kiteMenu();
+        }); //jQuery
+    </script>
+
+    <div class="wide_panel" id="wide_panel">
+
+        <div id="suppliers_table"></div>
+
+        <div class="button_panel" id="button_panel">
+            <button id="update_button" onclick="updateSupplier()" class="mlbutton">Update</button>
+            <button id="new_button" onclick="prepareNewSupplier()" class="mlbutton">New</button>
+            <button id="cancel_button" onclick="cancelNewSupplier()" class="mlbutton">Cancel</button>
+            <button id="add_button" onclick="newSupplier()" class="mlbutton">Save</button>
+            <button id="delete_button" onclick="deleteSupplier()" class="mlbutton">Delete</button>
+            <a href="/suppliers/download-as-csv"><button id="export_button" class="mlbutton">Export</button></a>
+        </div>
+
+        <div class="input_panel" id="input_panel">
+            <div class="form-group" id="supplier_last_name_label">
+              <span for="supplier_last_name" style="width:120px;">Last name</span>
+              <input id="supplier_last_name" class="form-field" type="text" placeholder="Last name" />
+            </div>
+
+            <div class="form-group" id="supplier_name_label">
+              <span for="supplier_name" style="width:120px;">Name</span>
+              <input id="supplier_name" class="form-field" type="text" placeholder="Name" />
+            </div>
+
+            <div class="form-group" id="supplier_email_label">
+              <span for="supplier_email" style="width:120px;">Email</span>
+              <input id="supplier_email" class="form-field" type="text" placeholder="Email" />
+            </div>
+
+            <div class="form-group" id="supplier_phone_label">
+              <span for="supplier_phone" style="width:120px;">Phone number</span>
+              <input id="supplier_phone" class="form-field" type="text" placeholder="Phone number" />
+            </div>
+            
+            <div class="form-group" id="supplier_company_label">
+              <span for="supplier_company" style="width:120px;">Company</span>
+              <input id="supplier_company" class="form-field" type="text" placeholder="Company" />
+            </div>
+
+            <div class="form-group" id="supplier_comment_label">
+              <span for="supplier_comment" style="width:120px;">Comment</span>
+              <input id="supplier_comment" class="form-field" type="text" placeholder="Comment" />
+            </div>
+            
+        </div>
+        
+
+    </div>
+    
+    <div id="toast_message" class="notification is-danger flash"></div>
+</body>
+
+</html>

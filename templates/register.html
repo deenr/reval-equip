@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reval - Register</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/reval_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/register_form.css') }}">
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+  <script src="{{url_for('static', filename='js/register.js')}}"></script>
+
+
+  <!--Font Awesome-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+</head>
+
+<body>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger flash">
+            <div class="notification_text">
+                {{ messages[0] }}<text style="padding-left:10px;" onclick="removeFlashNotification()">x</text>
+            </div>
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="session">
+        <div class="left">
+            <div class="register_screen">
+                <h4><span>REGISTER</span></h4>
+                <p id="have_account">Already have an account? <span><a href="login">Login</a></span></p>
+                <form method="post" action="/register" enctype="multipart/form-data">
+                    <div class="form-group" id="register_name_label">
+                        <span for="register_name" style="width:120px;">Name</span>
+                        <input id="register_name" class="form-field" type="text" name="register_name" placeholder="Name" />
+                    </div>
+                    <div class="form-group" id="register_last_name_label">
+                        <span for="register_last_name" style="width:120px;">Last name</span>
+                        <input id="register_last_name" class="form-field" type="text" name="register_last_name" placeholder="Last name" />
+                    </div>
+                    <div class="form-group" id="register_email_label">
+                        <span for="register_email" style="width:120px;">Email</span>
+                        <input id="register_email" class="form-field" type="text" name="register_email" placeholder="Email" />
+                    </div>
+                    <div class="form-group" id="register_file_label">
+                        <input id="register_file" name="file" type="file" class="form-field">   
+                    </div>
+                    <button id="register_button" class="mlbutton">Register</button>
+                </form>
+            </div>
+        </div>
+        <div class="right">
+            <img src="static\images\register_bg.jpg">
+        </div>
+    </div>
+
+</body>
+
+</html>

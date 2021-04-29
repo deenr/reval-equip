@@ -1,0 +1,3 @@
+function removeFlashNotification() {
+    $(".notification").remove();
+}
