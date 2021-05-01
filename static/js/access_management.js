@@ -130,6 +130,7 @@ function allowUser(row) {
     $.get("/access-management/allow?user_id=" + selectedUser.ID + "&user_email=" + selectedUser.user_email, function (data, status) {
         if (data.localeCompare("http200") == 0) {
             getListOfNotAllowedUsers();
+            showToast('User allowed successfully.')
         }
     });
 }
@@ -139,6 +140,7 @@ function denyUser(row) {
     $.get("/access-management/deny?user_id=" + selectedUser.ID, function (data, status) {
         if (data.localeCompare("http200") == 0) {
             getListOfNotAllowedUsers();
+            showToast('User denied successfully.')
         }
     });
 }
@@ -166,3 +168,21 @@ function openPicturePopUp() {
 function closePicturePopUp() {
     document.getElementById("picture_pop_up").style.display = "none";
 }
+
+// FLASH/TOAST NOTIFICATIONS-------------------------------------------------------------------------------------------
+function showToast(text, color = '#01A38C') {
+    var toastHTML = `<div id="toast_pop_up" style="background-color:${color};" class="mlbutton">${text}</div>`;
+
+    $("#toast_message").html(toastHTML);
+
+    setTimeout(function () {
+        $('#toast_message').fadeOut(500, function () {
+            $(this).empty().show();
+        });
+    }, 2500);
+}
+
+function removeFlashNotification() {
+    $(".notification").remove();
+}
+// --------------------------------------------------------------------------------------------------------------------

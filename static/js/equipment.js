@@ -23,7 +23,7 @@ $(document).ready(function () {
             showAllInputs(false);
             setReadOnly(true);
         }
-        if (g_currentUser.user_can_see_financial_data) {
+        if (g_currentUser.user_is_financial_team) {
             showButtons(true);
             showAllInputs(true);
             setReadOnly(false);

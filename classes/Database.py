@@ -2,6 +2,8 @@ import os
 import platform
 import sqlite3
 
+from classes.Paths import get_database_path
+
 
 def dict_factory(cursor, row):
     d = {}
@@ -12,18 +14,21 @@ def dict_factory(cursor, row):
 
 class Database(object):
     def __init__(self):
-        import configparser
-        config = configparser.ConfigParser()
+        # import configparser
+        # config = configparser.ConfigParser()
         current_os = platform.system().lower()
 
         if current_os.lower() == "windows":
-            config.read(os.getcwd() + os.path.sep + 'revalConfig.ini')
-            self.db_f_name = config['DEFAULT']['db_f_name']
-            self.conn = sqlite3.connect(os.getcwd() + os.path.sep + self.db_f_name)
+            # config.read(os.getcwd() + os.path.sep + 'reval-config.ini')
+            # self.db_f_name = config['DEFAULT']['db_f_name']
+            # # self.conn = sqlite3.connect(os.getcwd() + os.path.sep + self.db_f_name)
+
+            self.conn = sqlite3.connect(os.path.normpath(get_database_path()))
         else:
-            config.read(os.getcwd() + os.path.sep + 'revalConfig.ini')
-            self.db_f_name = config['DEFAULT']['db_f_name']
-            self.conn = sqlite3.connect(os.getcwd() + os.path.sep + self.db_f_name)
+            # config.read(os.getcwd() + os.path.sep + 'reval-config.ini')
+            # self.db_f_name = config['DEFAULT']['db_f_name']
+            # self.conn = sqlite3.connect(os.getcwd() + os.path.sep + self.db_f_name)
+            self.conn = sqlite3.connect(os.path.normpath(get_database_path()))
 
     def create_table(self, table_name):
         c = self.conn.cursor()

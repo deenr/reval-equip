@@ -31,7 +31,10 @@ html, body {
 
 #not_allowed_users_table {
   position: absolute;
-  height: 70vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 70vh;
   width: 100%;
   overflow-x: hidden;
   text-align: center;
@@ -49,6 +52,11 @@ html, body {
 
 .file_icon img {
   cursor: pointer;
+}
+
+#toast_pop_up {
+  margin: auto;
+  text-align: center;
 }
 
 /* The picture_pop_up (background) */

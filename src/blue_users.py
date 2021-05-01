@@ -414,7 +414,7 @@ def get_user_permissions_by_id():
     db = Database()
     user_id = request.args.get('ID')
 
-    sql = 'SELECT ID, user_can_see_financial_data, user_is_admin, user_is_lender, user_is_lender_admin, ' \
+    sql = 'SELECT ID, user_is_financial_team, user_is_admin, user_is_lender, user_is_lender_admin, ' \
           'user_is_owner FROM users WHERE ID = "' + user_id + '" '
     db.conn.row_factory = db.dict_factory
     c = db.conn.cursor()

@@ -48,7 +48,7 @@ def change_password_form():
     db.conn.commit()
     c.close()
 
-    flash("Passport successfully changed.")
+    flash("Password successfully changed.")
     return redirect(url_for('auth.login'))
 
 
