@@ -12,4 +12,5 @@ def get_database_path():
     database_path = ''
     for p in project_path:
         database_path = database_path + p + '\\'
-    return database_path + db_name
+    # return database_path + db_name
+    return 'database/' + db_name

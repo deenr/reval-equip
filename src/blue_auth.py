@@ -83,20 +83,17 @@ def register_post():
     file_type = filename.rsplit('.', 1)[-1]
 
     if file_type == 'png' or file_type == 'jpg' or file_type == 'jpeg' or file_type == 'gif':
-        print(os.getcwd())
-        updir = os.path.join(os.getcwd(), 'static\\images\\upload\\')
-        print(updir)
+        updir = os.path.join(os.getcwd(), 'static/images/upload')
 
         new_picture = Picture(picture_name=filename, user_id=user_id)
         arch_db.session.add(new_picture)
         arch_db.session.commit()
     else:
-        updir = os.path.join(os.getcwd(), 'static\\docs\\upload\\')
+        updir = os.path.join(os.getcwd(), 'static/docs/upload')
 
         new_document = Document(document_name=filename, user_id=user_id)
         arch_db.session.add(new_document)
         arch_db.session.commit()
-
     file.save(os.path.join(updir, filename))
 
     flash("You will receive an email once you have been given access to login.")
