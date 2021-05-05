@@ -1,9 +1,10 @@
 import os
 from datetime import timedelta
 
-from flask import Flask
+from flask import Flask, url_for
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import redirect
 
 from classes.Paths import get_database_path
 from src.blue_access_management import access_management
@@ -19,7 +20,6 @@ from classes.Database import Database
 from classes.Model import User
 
 app = Flask(__name__)
-
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + get_database_path()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -57,6 +57,11 @@ def load_user(user_id):
     # return User.query.get(int(user_id))
     print(User.query.filter_by(id=user_id))
     return User.query.filter_by(id=user_id).first()
+
+
+@app.route("/")
+def main():
+    return redirect(url_for('equipment._equipment'))
 
 
 @app.route("/test")
