@@ -57,8 +57,6 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
           envs: IMAGE_NAME
           script: |
-            IMAGE_LOCATION=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
-
             # Stop running container
             docker stop $(echo $IMAGE_NAME)
 
@@ -70,4 +68,4 @@ jobs:
             -v volume-reval:/reval-equip/database \
             -p 5000:5000 \
             --name $(echo $IMAGE_NAME) \
-            IMAGE_LOCATION
+            docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
