@@ -22,14 +22,14 @@ CMD ["python", "app.py"]
 # sudo chmod +x /usr/bin/docker-volume-plugin-dostorage
 # sudo docker-volume-plugin-dostorage --access-token=<TOKEN_FROM_DIGITAL_OCEAN> &
 # sudo service docker restart
-# sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_<VOLUME_NAME>
-# docker volume create --driver dostorage --name <VOLUME_NAME>
+# sudo mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_volume-reval
+# docker volume create --driver dostorage --name volume-reval
 # git clone https://github.com/deenr/reval-equip.git app
 # cd app
 # docker image build -t reval-build .
-# docker run --name reval-build -v <VOLUME_NAME>:/reval-equip/database -p 5000:5000 -d reval-build
+# docker run --name reval-container -v volume-reval:/reval-equip/database -p 5000:5000 -d reval-build
 # docker ps
-# docker volume inspect <VOLUME_NAME>
+# docker volume inspect volume-reval
 
 
 

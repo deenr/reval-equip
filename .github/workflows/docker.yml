@@ -41,8 +41,8 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:$(echo $GITHUB_SHA | head -c7)
+          docker push $IMAGE_ID:$(echo $GITHUB_SHA | head -c7)
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,7 +56,7 @@ jobs:
           HOST: ${{ secrets.DIGITALOCEAN_HOST }}
           USERNAME: ${{ secrets.DIGITALOCEAN_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
-          envs: IMAGE_NAME, CONTAINER_NAME
+          envs: IMAGE_NAME, CONTAINER_NAME, GITHUB_SHA
           script: |
             # Stop running container
             docker stop $(echo $CONTAINER_NAME)
@@ -71,4 +71,4 @@ jobs:
             -v volume-reval:/reval-equip/database \
             -p 5000:5000 \
             --name $(echo $CONTAINER_NAME) \
-            docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
+            docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:$(echo $GITHUB_SHA | head -c7)
