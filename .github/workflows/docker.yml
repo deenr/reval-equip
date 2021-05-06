@@ -4,6 +4,7 @@ on: push
 
 env:
   IMAGE_NAME: reval-build
+  CONTAINER_NAME: reval-container
 
 jobs:
   # Push image to GitHub Packages.
@@ -55,13 +56,13 @@ jobs:
           HOST: ${{ secrets.DIGITALOCEAN_HOST }}
           USERNAME: ${{ secrets.DIGITALOCEAN_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
-          envs: IMAGE_NAME
+          envs: IMAGE_NAME, CONTAINER_NAME
           script: |
             # Stop running container
-            docker stop $(echo $IMAGE_NAME)
+            docker stop $(echo $CONTAINER_NAME)
 
             # Remove old container
-            docker rm $(echo $IMAGE_NAME)
+            docker rm $(echo $CONTAINER_NAME)
 
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
@@ -69,5 +70,5 @@ jobs:
             docker run -d \
             -v volume-reval:/reval-equip/database \
             -p 5000:5000 \
-            --name $(echo $IMAGE_NAME) \
+            --name $(echo $CONTAINER_NAME) \
             docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
