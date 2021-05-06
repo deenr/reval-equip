@@ -30,4 +30,8 @@ CMD ["python", "app.py"]
 # docker run -v <VOLUME_NAME>:/reval-equip/database -p 5000:5000 -d reval-build
 # docker ps
 # docker volume inspect <VOLUME_NAME>
+
+
+
+# df -h
 #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #
