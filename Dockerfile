@@ -27,7 +27,7 @@ CMD ["python", "app.py"]
 # git clone https://github.com/deenr/reval-equip.git app
 # cd app
 # docker image build -t reval-build .
-# docker run -v <VOLUME_NAME>:/reval-equip/database -p 5000:5000 -d reval-build
+# docker run --name reval-build -v <VOLUME_NAME>:/reval-equip/database -p 5000:5000 -d reval-build
 # docker ps
 # docker volume inspect <VOLUME_NAME>
 
