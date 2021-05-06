@@ -26,8 +26,11 @@ jobs:
       - name: Log in to DigitalOcean Container Registry
         run: doctl registry login
 
+      - name: Tag image with the fully qualified destination path
+        run: docker tag $(echo $IMAGE_NAME) $(echo $DIGITALOCEAN_REGISTRY)/$(echo $IMAGE_NAME)
+
       - name: Push image to DigitalOcean Container Registry
-        run: docker push $(echo $DIGITALOCEAN_REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+        run: docker push $(echo $DIGITALOCEAN_REGISTRY)/$(echo $IMAGE_NAME)
 
   # deploy:
   #   runs-on: ubuntu-latest
