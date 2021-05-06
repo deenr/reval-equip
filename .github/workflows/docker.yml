@@ -30,7 +30,7 @@ jobs:
         run: docker tag $(echo $IMAGE_NAME) ${{ secrets.DIGITALOCEAN_REGISTRY }}/$(echo $IMAGE_NAME)
 
       - name: Push image to DigitalOcean Container Registry
-        run: docker push ${{ secrets.DIGITALOCEAN_REGISTRY }}/$(echo $IMAGE_NAME)
+        run: docker push ${{ secrets.DIGITALOCEAN_REGISTRY }}/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) $(echo $COMMAND)
 
   # deploy:
   #   runs-on: ubuntu-latest
