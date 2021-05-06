@@ -67,7 +67,7 @@ jobs:
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            -v <VOLUME_NAME>:/reval-equip/database \
+            -v volume-reval:/reval-equip/database \
             -p 5000:5000 \
             --name $(echo $IMAGE_NAME) \
             IMAGE_ID $(echo $COMMAND)
