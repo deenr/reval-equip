@@ -55,19 +55,20 @@ jobs:
           HOST: ${{ secrets.DIGITALOCEAN_HOST }}
           USERNAME: ${{ secrets.DIGITALOCEAN_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
-          script: |
-            IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
+          script: whoami
+          # script: |
+          #   IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
 
-            # Stop running container
-            docker stop $(echo $IMAGE_NAME)
+          #   # Stop running container
+          #   docker stop $(echo $IMAGE_NAME)
 
-            # Remove old container
-            docker rm $(echo $IMAGE_NAME)
+          #   # Remove old container
+          #   docker rm $(echo $IMAGE_NAME)
 
-            # Run a new container from a new image
-            docker run -d \
-            --restart always \
-            -v volume-reval:/reval-equip/database \
-            -p 5000:5000 \
-            --name $(echo $IMAGE_NAME) \
-            IMAGE_ID $(echo $COMMAND)
+          #   # Run a new container from a new image
+          #   docker run -d \
+          #   --restart always \
+          #   -v volume-reval:/reval-equip/database \
+          #   -p 5000:5000 \
+          #   --name $(echo $IMAGE_NAME) \
+          #   IMAGE_ID $(echo $COMMAND)
