@@ -55,6 +55,7 @@ jobs:
           HOST: ${{ secrets.DIGITALOCEAN_HOST }}
           USERNAME: ${{ secrets.DIGITALOCEAN_USERNAME }}
           KEY: ${{ secrets.SSH_KEY }}
+          envs: IMAGE_NAME
           script: |
             IMAGE_LOCATION=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:latest
 
