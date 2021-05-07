@@ -129,8 +129,8 @@ function allowUser(row) {
     var selectedUser = g_notAllowedUsers[row];
     $.get("/access-management/allow?user_id=" + selectedUser.ID + "&user_email=" + selectedUser.user_email, function (data, status) {
         if (data.localeCompare("http200") == 0) {
-            showToast('User allowed successfully.')
             getListOfNotAllowedUsers();
+            showToast('User allowed successfully.')
         }
     });
 }
@@ -139,8 +139,8 @@ function denyUser(row) {
     var selectedUser = g_notAllowedUsers[row];
     $.get("/access-management/deny?user_id=" + selectedUser.ID, function (data, status) {
         if (data.localeCompare("http200") == 0) {
-            showToast('User denied successfully.')
             getListOfNotAllowedUsers();
+            showToast('User denied successfully.')
         }
     });
 }
@@ -153,8 +153,9 @@ function openAddedPictureOfUser(user_id) {
         $("#picture_pop_up").html(picturePopUpHTML);
         picturePopUpHTML = picturePopUpHTML.concat('<span class="close cursor" onclick="closePicturePopUp()" style="margin-top: 55px;">×</span>');
         picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-content">');
-        picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-picture" style="display: block;"><img title="' + picture_name + '" src=database\\' + picture_name + '></div>');
+        picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-picture" style="display: block;"><img title="' + picture_name + '" src="' + g_imageDirectory + 'upload\\' + picture_name + '"></div>');
         picturePopUpHTML = picturePopUpHTML.concat('</div>');
+        // console.log(picturePopUpHTML)
         $("#picture_pop_up").html(picturePopUpHTML);
         openPicturePopUp();
     });
