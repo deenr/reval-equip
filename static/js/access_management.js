@@ -149,7 +149,7 @@ function openAddedPictureOfUser(user_id) {
     $.get("/access-files/get-by-user-id?user_id=" + user_id, function (data, status) {
         var picture = JSON.parse(data)[0];
         var picture_name = picture.picture_name;
-        var picturePopUpHTML = '';
+        var picturePopUpHTML = ''; 
         $("#picture_pop_up").html(picturePopUpHTML);
         picturePopUpHTML = picturePopUpHTML.concat('<span class="close cursor" onclick="closePicturePopUp()" style="margin-top: 55px;">×</span>');
         picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-content">');

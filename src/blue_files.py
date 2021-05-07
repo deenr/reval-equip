@@ -11,6 +11,13 @@ from classes.Database import Database
 files = Blueprint('files', __name__)
 
 
+def if_path_dont_exist_then_create():
+    if not os.path.exists('static/images/upload'):
+        os.makedirs('static/images/upload')
+    if not os.path.exists('static/docs/upload'):
+        os.makedirs('static/docs/upload')
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
