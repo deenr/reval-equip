@@ -56,13 +56,14 @@ def download_access_files_by_user_id():
         return ''
 
     document = request.args.get('document')
-    return send_file('static\\docs\\upload\\' + document,
+    return send_file('static/docs/upload/' + document,
                      attachment_filename=document)
 
 
 @files.route('/equipment-files/upload', methods=['GET', 'POST'])
 @login_required
 def upload_equipment_file():
+
     equipment_id = request.args.get('equipment_id')
     if request.method == 'POST':
         file = request.files['file']
@@ -86,6 +87,9 @@ def upload_equipment_file():
 
             c.execute(sql_string)
             db.conn.commit()
+
+            if_path_dont_exist_then_create()
+
             file.save(os.path.join(updir, filename))
             file_size = os.path.getsize(os.path.join(updir, filename))
             json_string = '{"name": "' + filename + '", "size": "' + str(file_size) + '"}'
@@ -163,6 +167,9 @@ def upload_user_profile_picture():
             c.execute(sql_insert)
 
             db.conn.commit()
+
+            if_path_dont_exist_then_create()
+
             file.save(os.path.join(updir, filename))
             file_size = os.path.getsize(os.path.join(updir, filename))
             json_string = '{"name": "' + filename + '", "size": "' + str(file_size) + '"}'
