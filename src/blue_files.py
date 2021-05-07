@@ -49,7 +49,7 @@ def download_access_files_by_user_id():
         return ''
 
     document = request.args.get('document')
-    return send_file(os.getcwd() + '\\static\\docs\\upload\\' + document,
+    return send_file('static\\docs\\upload\\' + document,
                      attachment_filename=document)
 
 
@@ -66,13 +66,13 @@ def upload_equipment_file():
             c = db.conn.cursor()
             if file_type == 'png' or file_type == 'jpg' or file_type == 'jpeg' or file_type == 'gif':
                 # prepare upload picture to files
-                updir = os.path.join(os.getcwd(), '../static/images/upload\\')
+                updir = os.path.join('/static/images/upload')
                 filename = 'equipment_picture_id_' + str(equipment_id) + '_filename_' + filename
                 # prepare upload picture to pictures table in db
                 sql_string = 'INSERT INTO pictures (picture_name, equipment_id) VALUES ("' + filename + '","' + equipment_id + '")'
             else:
                 # prepare upload document to files
-                updir = os.path.join(os.getcwd(), '../static/docs/upload\\')
+                updir = os.path.join('/static/docs/upload')
                 filename = 'equipment_document_id_' + str(equipment_id) + '_filename_' + filename
                 # prepare upload document to documents table in db
                 sql_string = 'INSERT INTO documents (document_name, equipment_id) VALUES ("' + filename + '","' + equipment_id + '")'
@@ -120,7 +120,7 @@ def get_equipment_documents_by_equipment_id():
 @login_required
 def download_equipment_document():
     document = request.args.get('document')
-    return send_file(os.getcwd() + '\\static\\docs\\upload\\' + document,
+    return send_file('/static/docs/upload/' + document,
                      attachment_filename=document)
 
 
@@ -140,14 +140,14 @@ def upload_user_profile_picture():
             c = db.conn.cursor()
 
             # prepare upload picture to files
-            updir = os.path.join(os.getcwd(), '../static/images/upload\\')
+            updir = os.path.join('/static/images/upload')
             filename = 'user_profile_picture_id_' + str(user_id) + '_filename_' + filename
             # delete previous profile picture
             sql_delete = 'DELETE FROM pictures WHERE user_id = "' + user_id + '" AND picture_name LIKE ' \
                                                                               '"user_profile_picture_id_%" '
             c.execute(sql_delete)
 
-            pictures_dir = os.path.join(os.getcwd(), '../static/images/upload\\')
+            pictures_dir = os.path.join('/static/images/upload')
             for fname in os.listdir(pictures_dir):
                 if fname.startswith("user_profile_picture_id_" + user_id):
                     os.remove(os.path.join(pictures_dir, fname))
