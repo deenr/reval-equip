@@ -152,9 +152,8 @@ function openAddedPictureOfUser(user_id) {
         var picturePopUpHTML = '';
         picturePopUpHTML = picturePopUpHTML.concat('<span class="close cursor" onclick="closePicturePopUp()" style="margin-top: 55px;">×</span>');
         picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-content">');
-        picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-picture" style="display: block;"><img title="' + picture_name + '" src="' + g_imageDirectory + 'upload\\' + picture_name + '"></div>');
+        picturePopUpHTML = picturePopUpHTML.concat('<div class="picture_pop_up-picture" style="display: block;"><img title="' + picture_name + '" src=database\\files\\"' + picture_name + '"></div>');
         picturePopUpHTML = picturePopUpHTML.concat('</div>');
-        // console.log(picturePopUpHTML)
         openPicturePopUp();
     });
 }
