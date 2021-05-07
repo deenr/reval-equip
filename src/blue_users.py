@@ -307,7 +307,7 @@ def delete_user():
     c.execute(sql2)
     db.conn.commit()
 
-    pictures_dir = os.path.join(os.getcwd(), '/static/images/upload/')
+    pictures_dir = os.path.join('static/images/upload/')
     for filename in os.listdir(pictures_dir):
         if filename.startswith("user_profile_picture_id_" + ID) or filename.startswith("user_register_upload_id_" + ID):
             os.remove(os.path.join(pictures_dir, filename))
