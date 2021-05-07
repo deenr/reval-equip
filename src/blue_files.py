@@ -158,7 +158,7 @@ def upload_user_profile_picture():
                                                                               '"user_profile_picture_id_%" '
             c.execute(sql_delete)
 
-            pictures_dir = os.path.join('/static/images/upload')
+            pictures_dir = os.path.join('/static/images/upload/')
             for fname in os.listdir(pictures_dir):
                 if fname.startswith("user_profile_picture_id_" + user_id):
                     os.remove(os.path.join(pictures_dir, fname))
