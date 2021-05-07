@@ -350,12 +350,12 @@ def delete_equipment():
     c.execute(sql3)
     db.conn.commit()
 
-    pictures_dir = os.path.join(os.getcwd(), '../static/images/upload\\')
+    pictures_dir = os.path.join('static/images/upload')
     for filename in os.listdir(pictures_dir):
         if filename.startswith("equipment_picture_id_" + ID):
             os.remove(os.path.join(pictures_dir, filename))
 
-    documents_dir = os.path.join(os.getcwd(), '../static/docs/upload\\')
+    documents_dir = os.path.join('static/docs/upload')
     for filename in os.listdir(documents_dir):
         if filename.startswith("equipment_document_id_" + ID):
             os.remove(os.path.join(documents_dir, filename))
