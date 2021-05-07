@@ -7,6 +7,7 @@ from flask_login import login_required
 from werkzeug.utils import secure_filename
 
 from classes.Database import Database
+from classes.Paths import get_files_directory
 
 files = Blueprint('files', __name__)
 
@@ -49,7 +50,7 @@ def download_access_files_by_user_id():
         return ''
 
     document = request.args.get('document')
-    return send_file(os.getcwd() + '\\static\\docs\\upload\\' + document,
+    return send_file(os.path.join(get_files_directory(), document),
                      attachment_filename=document)
 
 

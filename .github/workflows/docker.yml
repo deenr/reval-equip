@@ -68,7 +68,7 @@ jobs:
 
             # Run a new container from a new image
             docker run -d \
-            -v volume-reval:/reval-equip/database \
+            -v /mnt/volume_reval:/reval-equip/database \
             -p 80:5000 \
             --name $(echo $CONTAINER_NAME) \
             docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME:$(echo $GITHUB_SHA | head -c7)

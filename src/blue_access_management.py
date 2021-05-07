@@ -45,7 +45,7 @@ def allow_access():
     c.close()
 
     # sent email to user with temporary password so he can access the db after he changes his profile
-    set_password_link = 'http://127.0.0.1:5000/change-password?email=' + email_hash
+    set_password_link = 'http://68.183.6.127/change-password?email=' + email_hash
     subject = 'REVAL: You have been allowed! Setup your profile!'
 
     content = '''Hello,

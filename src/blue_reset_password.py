@@ -40,7 +40,7 @@ def reset_password_form():
 
     subject = 'REVAL: Reset your password'
     email_hash = hashlib.sha256(user_email.encode()).hexdigest()
-    change_password_link = 'http://127.0.0.1:5000/change-password?email=' + email_hash
+    change_password_link = 'http://68.183.6.127/change-password?email=' + email_hash
     content = '''Hello,
 Follow this link to reset your Reval password for your account.
 '''+change_password_link+'''
