@@ -51,8 +51,10 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
-if not os.path.exists('database/files'):
-    os.makedirs('database/files')
+if not os.path.exists('static/images/upload'):
+    os.makedirs('static/images/upload')
+if not os.path.exists('static/docs/upload'):
+    os.makedirs('static/docs/upload')
 
 @login_manager.user_loader
 def load_user(user_id):

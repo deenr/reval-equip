@@ -5,7 +5,6 @@ from flask_login import login_required, logout_user, login_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import redirect, secure_filename
 from classes.Model import Document, User, Picture
-from classes.Paths import get_files_directory
 
 auth = Blueprint('auth', __name__)
 
@@ -84,15 +83,18 @@ def register_post():
     file_type = filename.rsplit('.', 1)[-1]
 
     if file_type == 'png' or file_type == 'jpg' or file_type == 'jpeg' or file_type == 'gif':
+        updir = os.path.join(os.getcwd(), 'static/images/upload')
+
         new_picture = Picture(picture_name=filename, user_id=user_id)
         arch_db.session.add(new_picture)
         arch_db.session.commit()
     else:
+        updir = os.path.join(os.getcwd(), 'static/docs/upload')
+
         new_document = Document(document_name=filename, user_id=user_id)
         arch_db.session.add(new_document)
         arch_db.session.commit()
-
-    file.save(os.path.join(get_files_directory(), filename))
+    file.save(os.path.join(updir, filename))
 
     flash("You will receive an email once you have been given access to login.")
     return redirect(url_for('auth.login'))

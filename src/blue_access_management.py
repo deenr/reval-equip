@@ -9,7 +9,6 @@ from werkzeug.utils import redirect
 
 from classes import MailServer
 from classes.Database import Database
-from classes.Paths import get_files_directory
 
 access_management = Blueprint('access_management', __name__)
 
@@ -82,10 +81,17 @@ def deny_access():
     c.execute(sql2)
     db.conn.commit()
 
-    for filename in os.listdir(get_files_directory()):
-        if filename.startswith("user_register_upload_id_" + user_id) or filename.startswith(
-                "user_register_upload_id_" + user_id):
-            os.remove(os.path.join(get_files_directory(), filename))
+    directory = 'static\\docs\\upload\\'
+    my_dir = os.path.join(os.getcwd(), directory)
+    for filename in os.listdir(my_dir):
+        if filename.startswith("user_register_upload_id_" + user_id):
+            os.remove(os.path.join(my_dir, filename))
+
+    directory = 'static\\images\\upload\\'
+    my_dir = os.path.join(os.getcwd(), directory)
+    for filename in os.listdir(my_dir):
+        if filename.startswith("user_register_upload_id_" + user_id):
+            os.remove(os.path.join(my_dir, filename))
 
     c.close()
 
