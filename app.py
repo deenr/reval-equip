@@ -56,6 +56,7 @@ if not os.path.exists('static/images/upload'):
 if not os.path.exists('static/docs/upload'):
     os.makedirs('static/docs/upload')
 
+
 @login_manager.user_loader
 def load_user(user_id):
     # return User.query.get(int(user_id))
@@ -65,6 +66,10 @@ def load_user(user_id):
 
 @app.route("/")
 def main():
+    if not os.path.exists('static/images/upload'):
+        os.makedirs('static/images/upload')
+    if not os.path.exists('static/docs/upload'):
+        os.makedirs('static/docs/upload')
     return redirect(url_for('equipment._equipment'))
 
 
