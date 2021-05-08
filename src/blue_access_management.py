@@ -81,15 +81,15 @@ def deny_access():
     c.execute(sql2)
     db.conn.commit()
 
-    my_dir = os.path.join('static/docs/upload/')
+    my_dir = os.path.join('database/')
     for filename in os.listdir(my_dir):
         if filename.startswith("user_register_upload_id_" + user_id):
             os.remove(os.path.join(my_dir, filename))
 
-    my_dir = os.path.join('static/images/upload/')
-    for filename in os.listdir(my_dir):
-        if filename.startswith("user_register_upload_id_" + user_id):
-            os.remove(os.path.join(my_dir, filename))
+    # my_dir = os.path.join('static/images/upload/')
+    # for filename in os.listdir(my_dir):
+    #     if filename.startswith("user_register_upload_id_" + user_id):
+    #         os.remove(os.path.join(my_dir, filename))
 
     c.close()
 
