@@ -91,7 +91,7 @@ def register_post():
         arch_db.session.add(new_document)
         arch_db.session.commit()
 
-    updir = os.path.join('database/')
+    updir = os.path.join('database/files')
     file.save(os.path.join(updir, filename))
 
     flash("You will receive an email once you have been given access to login.")
