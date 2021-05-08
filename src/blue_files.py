@@ -63,7 +63,6 @@ def download_access_files_by_user_id():
 @files.route('/equipment-files/upload', methods=['GET', 'POST'])
 @login_required
 def upload_equipment_file():
-
     equipment_id = request.args.get('equipment_id')
     if request.method == 'POST':
         file = request.files['file']
@@ -74,13 +73,13 @@ def upload_equipment_file():
             c = db.conn.cursor()
             if file_type == 'png' or file_type == 'jpg' or file_type == 'jpeg' or file_type == 'gif':
                 # prepare upload picture to files
-                updir = '/static/images/upload'
+                updir = os.path.join('static/images/upload')
                 filename = 'equipment_picture_id_' + str(equipment_id) + '_filename_' + filename
                 # prepare upload picture to pictures table in db
                 sql_string = 'INSERT INTO pictures (picture_name, equipment_id) VALUES ("' + filename + '","' + equipment_id + '")'
             else:
                 # prepare upload document to files
-                updir = '/static/docs/upload'
+                updir = os.path.join('static/docs/upload')
                 filename = 'equipment_document_id_' + str(equipment_id) + '_filename_' + filename
                 # prepare upload document to documents table in db
                 sql_string = 'INSERT INTO documents (document_name, equipment_id) VALUES ("' + filename + '","' + equipment_id + '")'
