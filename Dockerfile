@@ -34,6 +34,6 @@ CMD ["python", "app.py"]
 
 
 # df -h
-# docker logs <name>
+# docker logs <name> 
 # docker exec -ti <name> sh
 #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #
