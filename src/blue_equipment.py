@@ -383,7 +383,8 @@ def download_equipment_as_csv():
         # Writing data of CSV file
         csv_writer.writerow(eq.values())
 
-    csv_file = data_file.read()
+    with open("database/files/data_equipment.csv") as fp:
+        csv_file = fp.read()
 
     user = flask_login.current_user
 
