@@ -387,7 +387,7 @@ def download_equipment_as_csv():
 
     # admin is allowed to receive all the data
     if user.is_admin():
-        return Response(csv_writer, mimetype="text/csv",
+        return Response(data_file, mimetype="text/csv",
                         headers={"Content-disposition": "attachment; filename=data_equipment.csv"})
     else:
         return redirect(request.referrer)
