@@ -56,7 +56,7 @@ def download_access_files_by_user_id():
         return ''
 
     document = request.args.get('document')
-    return send_file('static/docs/upload/' + document,
+    return send_file('database/files/' + document,
                      attachment_filename=document)
 
 
