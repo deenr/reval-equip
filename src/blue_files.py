@@ -120,7 +120,7 @@ def get_equipment_documents_by_equipment_id():
 @login_required
 def download_equipment_document():
     document = request.args.get('document')
-    return send_file('/static/docs/upload/' + document,
+    return send_file('database/files/' + document,
                      attachment_filename=document)
 
 
