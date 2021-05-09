@@ -383,11 +383,13 @@ def download_equipment_as_csv():
         # Writing data of CSV file
         csv_writer.writerow(eq.values())
 
+    csv_file = data_file.read()
+
     user = flask_login.current_user
 
     # admin is allowed to receive all the data
     if user.is_admin():
-        return Response(data_file, mimetype="text/csv",
+        return Response(csv_file, mimetype="text/csv",
                         headers={"Content-disposition": "attachment; filename=data_equipment.csv"})
     else:
         return redirect(request.referrer)
