@@ -262,7 +262,7 @@ def download_suppliers_as_csv():
     print(data)
     c.close()
 
-    data_file = open('../data_suppliers.csv', 'w', encoding="utf-8", newline='')
+    data_file = open('database/files/data_suppliers.csv', 'w', encoding="utf-8", newline='')
     csv_writer = csv.writer(data_file, delimiter=';')
 
     count = 0
@@ -275,7 +275,7 @@ def download_suppliers_as_csv():
         # Writing data of CSV file
         csv_writer.writerow(eq.values())
 
-    with open("../data_suppliers.csv") as fp:
+    with open("database/files/data_suppliers.csv") as fp:
         csv_file = fp.read()
 
     user = flask_login.current_user

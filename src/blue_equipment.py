@@ -350,15 +350,10 @@ def delete_equipment():
     c.execute(sql3)
     db.conn.commit()
 
-    pictures_dir = os.path.join('static/images/upload')
-    for filename in os.listdir(pictures_dir):
-        if filename.startswith("equipment_picture_id_" + ID):
-            os.remove(os.path.join(pictures_dir, filename))
-
-    documents_dir = os.path.join('static/docs/upload')
-    for filename in os.listdir(documents_dir):
-        if filename.startswith("equipment_document_id_" + ID):
-            os.remove(os.path.join(documents_dir, filename))
+    updir = os.path.join('database/files')
+    for filename in os.listdir(updir):
+        if filename.startswith("equipment_picture_id_" + ID) or filename.startswith("equipment_document_id_" + ID):
+            os.remove(os.path.join(updir, filename))
 
     c.close()
     return 'http200'
@@ -375,7 +370,7 @@ def download_equipment_as_csv():
     data = c.fetchall()
     c.close()
 
-    data_file = open('data_equipment.csv', 'w', encoding="utf-8", newline='')
+    data_file = open('database/files/data_equipment.csv', 'w', encoding="utf-8", newline='')
     csv_writer = csv.writer(data_file, delimiter=';')
 
     count = 0
@@ -388,7 +383,7 @@ def download_equipment_as_csv():
         # Writing data of CSV file
         csv_writer.writerow(eq.values())
 
-    with open("data_equipment.csv") as fp:
+    with open("database/files/data_equipment.csv") as fp:
         csv_file = fp.read()
 
     user = flask_login.current_user

@@ -11,13 +11,6 @@ from classes.Database import Database
 files = Blueprint('files', __name__)
 
 
-def if_path_dont_exist_then_create():
-    if not os.path.exists('static/images/upload'):
-        os.makedirs('static/images/upload')
-    if not os.path.exists('static/docs/upload'):
-        os.makedirs('static/docs/upload')
-
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
@@ -73,13 +66,11 @@ def upload_equipment_file():
             c = db.conn.cursor()
             if file_type == 'png' or file_type == 'jpg' or file_type == 'jpeg' or file_type == 'gif':
                 # prepare upload picture to files
-                updir = os.path.join('static/images/upload')
                 filename = 'equipment_picture_id_' + str(equipment_id) + '_filename_' + filename
                 # prepare upload picture to pictures table in db
                 sql_string = 'INSERT INTO pictures (picture_name, equipment_id) VALUES ("' + filename + '","' + equipment_id + '")'
             else:
                 # prepare upload document to files
-                updir = os.path.join('static/docs/upload')
                 filename = 'equipment_document_id_' + str(equipment_id) + '_filename_' + filename
                 # prepare upload document to documents table in db
                 sql_string = 'INSERT INTO documents (document_name, equipment_id) VALUES ("' + filename + '","' + equipment_id + '")'
@@ -87,8 +78,7 @@ def upload_equipment_file():
             c.execute(sql_string)
             db.conn.commit()
 
-            if_path_dont_exist_then_create()
-
+            updir = os.path.join('database/files')
             file.save(os.path.join(updir, filename))
             file_size = os.path.getsize(os.path.join(updir, filename))
             json_string = '{"name": "' + filename + '", "size": "' + str(file_size) + '"}'
@@ -150,24 +140,21 @@ def upload_user_profile_picture():
             c = db.conn.cursor()
 
             # prepare upload picture to files
-            updir = os.path.join('/static/images/upload')
+            updir = os.path.join('database/files')
             filename = 'user_profile_picture_id_' + str(user_id) + '_filename_' + filename
             # delete previous profile picture
             sql_delete = 'DELETE FROM pictures WHERE user_id = "' + user_id + '" AND picture_name LIKE ' \
                                                                               '"user_profile_picture_id_%" '
             c.execute(sql_delete)
 
-            pictures_dir = os.path.join('/static/images/upload/')
-            for fname in os.listdir(pictures_dir):
+            for fname in os.listdir(updir):
                 if fname.startswith("user_profile_picture_id_" + user_id):
-                    os.remove(os.path.join(pictures_dir, fname))
+                    os.remove(os.path.join(updir, fname))
             # prepare upload picture to pictures table in db
             sql_insert = 'INSERT INTO pictures (picture_name, user_id) VALUES ("' + filename + '","' + user_id + '") '
             c.execute(sql_insert)
 
             db.conn.commit()
-
-            if_path_dont_exist_then_create()
 
             file.save(os.path.join(updir, filename))
             file_size = os.path.getsize(os.path.join(updir, filename))
