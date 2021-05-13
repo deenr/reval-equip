@@ -29,7 +29,7 @@ CMD ["python", "app.py"]
 # docker image build -t reval-build .
 # docker run --name reval-container -v volume-reval:/reval-equip/database -p 5000:5000 -d reval-build
 # docker ps
-# docker volume inspect volume-reval 
+# docker volume inspect volume-reval
 
 
 
