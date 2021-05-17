@@ -66,16 +66,13 @@ def register_post():
         flash("There is already an account been made with this name. Contact the admin.")
         return redirect(url_for('auth.register'))
 
+    if not file or not allowed_file(file.filename):
+        flash("Please upload an allowed file.")
+        return redirect(url_for('auth.register'))
+
     new_user = User(user_last_name=last_name, user_name=name, user_email=email)
     arch_db = SQLAlchemy()
     arch_db.session.add(new_user)
-    arch_db.session.commit()
-
-    if not file or not allowed_file(file.filename):
-        flash("Please upload an allowed file.")
-        arch_db.session.delete(new_user)
-        arch_db.session.commit()
-        return redirect(url_for('auth.register'))
 
     user = User.query.filter_by(user_email=new_user.get_email()).first()
     user_id = user.get_id()
