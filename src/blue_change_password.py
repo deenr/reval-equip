@@ -20,7 +20,7 @@ def _change_password():
 def change_password_form():
     email_hash = request.form.get('email_hash')
     new_pw_hash = request.form.get('new_pw_hash')
-    confirm_pw_hash = request.form.get('confirm_pw_hash')
+    confirm_pw_hash = request.form.get('confirm_pw_hash') 
 
     if new_pw_hash == "" or confirm_pw_hash == "":
         flash("Make sure that both passwords are the filled in.")
