@@ -22,7 +22,7 @@ def update_profile():
 
     user = flask_login.current_user
     current_user_id = user.get_id()
-    return current_user_id + ''
+    return str(current_user_id) + ''
 
     # if current_user_id != ID:
 
