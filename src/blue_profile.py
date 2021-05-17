@@ -23,7 +23,7 @@ def update_profile():
     current_id = flask_login.current_user.get_id()
 
     if current_id != ID:
-        return 'http400'
+        return current_id
 
     user_last_name = request.args.get('user_last_name').upper()
     if user_last_name != '':
