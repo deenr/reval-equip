@@ -24,7 +24,7 @@ def update_profile():
     current_user_id = user.get_id()
 
     if str(current_user_id) != str(ID):
-        return str(current_user_id) + ' ' + ID
+        return 'http400'
 
     user_last_name = request.args.get('user_last_name').upper()
     if user_last_name != '':
