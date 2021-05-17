@@ -20,7 +20,7 @@ def update_profile():
     sql_parameters = ''
     ID = request.args.get('ID')
 
-    current_id = flask_login.current_user.get_id()
+    current_id = flask_login.current_user
 
     if current_id != ID:
         return current_id + ''
