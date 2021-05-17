@@ -20,10 +20,11 @@ def update_profile():
     sql_parameters = ''
     ID = request.args.get('ID')
 
-    current_id = flask_login.current_user
+    user = flask_login.current_user
+    current_user_id = user.get_id()
+    return current_user_id + ''
 
-    if current_id != ID:
-        return current_id + ''
+    # if current_user_id != ID:
 
     user_last_name = request.args.get('user_last_name').upper()
     if user_last_name != '':
