@@ -74,8 +74,8 @@ def register_post():
     arch_db = SQLAlchemy()
     arch_db.session.add(new_user)
 
-    user = User.query.filter_by(user_email=new_user.get_email()).first()
-    user_id = user.get_id()
+    user = User.query.all()
+    user_id = user.length() + 1
     filename = 'user_register_upload_id_' + str(user_id) + '_filename_' + secure_filename(file.filename)
     file_type = filename.rsplit('.', 1)[-1]
 
