@@ -24,7 +24,7 @@ def update_profile():
     current_user_id = user.get_id()
 
     if current_user_id != ID:
-        return str(current_user_id) + ''
+        return str(current_user_id) + ' ' + ID
 
     user_last_name = request.args.get('user_last_name').upper()
     if user_last_name != '':
